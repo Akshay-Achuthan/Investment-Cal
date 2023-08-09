@@ -1,6 +1,14 @@
 import "./InvestmentTable.css"
 
 const InvestmentTable = (props) => {
+  
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+   
   return (
     <table className="result">
         <thead>
@@ -15,11 +23,11 @@ const InvestmentTable = (props) => {
         <tbody>
           {props.tableData.map((item,index) => (
           <tr key={index}>
-            <td>{item.year}</td>
-            <td>{item.savingsEndOfYear}</td>
-            <td>{item.yearlyInterest}</td>
+            <td>{formatter.format(item.year)}</td>
+            <td>{formatter.format(item.savingsEndOfYear)}</td>
+            <td>{formatter.format(item.yearlyInterest)}</td>
             <td>TOTAL INTEREST GAINED</td>
-            <td>{item.yearlyContribution}</td>
+            <td>{formatter.format(item.yearlyContribution)}</td>
           </tr>
           ))}
         </tbody>
