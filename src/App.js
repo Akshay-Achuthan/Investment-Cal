@@ -1,18 +1,23 @@
+import React, {useState} from "react";
+
 import InvestmentLogo from "./Components/Investment/InvestmentLogo"
 import InvestmentForm from "./Components/Investment/InvestmentForm";
 import InvestmentTable from "./Components/Table/InvestmentTable";
 
+const yearlyData = []; // per-year results
+
 function App() {
+
+  const [yearlyRequiredData,setYearlyRequiredData] = useState(yearlyData);
+  
   const calculateHandler = (userInput) => {
     // Should be triggered when form is submitted
     // You might not directly want to bind it to the submit event on the form though...
 
-    const yearlyData = []; // per-year results
-
-    let currentSavings = +userInput['current-savings']; // feel free to change the shape of this input object!
-    const yearlyContribution = +userInput['yearly-contribution']; // as mentioned: feel free to change the shape...
-    const expectedReturn = +userInput['expected-return'] / 100;
-    const duration = +userInput['duration'];
+    let currentSavings = userInput.currentSaving; // feel free to change the shape of this input object!
+    const yearlyContribution = userInput.yearlyContribution; // as mentioned: feel free to change the shape...
+    const expectedReturn = userInput.expectedReturn / 100;
+    const duration = userInput.duration;
 
     // The below code calculates yearly results (total savings, interest etc)
     for (let i = 0; i < duration; i++) {
@@ -27,18 +32,23 @@ function App() {
       });
     }
 
+    setYearlyRequiredData( (prevData) => {
+      return [...prevData,yearlyRequiredData]
+    })
+    // console.log(yearlyData);
+
     // do something with yearlyData ...
   };
 
   return (
     <div>
       <InvestmentLogo/>
-      <InvestmentForm/>
+      <InvestmentForm onFormSubmit={calculateHandler}/>
 
       {/* Todo: Show below table conditionally (only once result data is available) */}
       {/* Show fallback text if no data is available */}
 
-      <InvestmentTable/>
+      <InvestmentTable tableData={yearlyRequiredData}/>
     </div>
   );
 }
