@@ -1,4 +1,4 @@
-import "./InvestmentTable.css"
+import styles from "./InvestmentTable.module.css"
 
 const InvestmentTable = (props) => {
   
@@ -10,7 +10,7 @@ const InvestmentTable = (props) => {
   });
    
   return (
-    <table className="result">
+    <table className={styles.result}>
         <thead>
           <tr>
             <th>Year</th>
