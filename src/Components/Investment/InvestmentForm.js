@@ -28,27 +28,16 @@ const InvestmentForm = (props) => {
     props.onFormSubmit(userInput);
   }
   
-  const currentSavingHandler = (event) => {
-    // console.log(event.target.value);
-    setCurrentSaving(event.target.value);
-  }
-  
-  const yearlySavingHandler = (event) => {
-    // console.log(event.target.value);
-    setYearlySaving(event.target.value);
-    
-  }
-  
-  const expectedInterestHandler = (event) => {
-    // console.log(event.target.value);
-    setExpectedInterest(event.target.value);
-    
-  }
-  
-  const investmentDurationHandler = (event) => {
-    // console.log(event.target.value);
-    setDurationInterest(event.target.value);
-    
+  const commonUserInputHandler = (identifier,value) => {
+    if(identifier=== "currentSavings"){
+      setCurrentSaving(value);  
+    }else if(identifier === "yearlySavings"){
+      setYearlySaving(value);
+    }else if(identifier === "expectedReturn"){
+      setExpectedInterest(value);
+    }else{
+      setDurationInterest(value);
+    }
   }
   
   return (
@@ -56,11 +45,15 @@ const InvestmentForm = (props) => {
         <div className="input-group">
           <p>
             <label htmlFor="current-savings">Current Savings ($)</label>
-            <input value={currentSaving} onChange={currentSavingHandler} type="number" id="current-savings" />
+            <input value={currentSaving} onChange={(event) => {
+             commonUserInputHandler('currentSavings',event.target.value); 
+            }} type="number" id="current-savings" />
           </p>
           <p>
             <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
-            <input value={yearlySaving} onChange={yearlySavingHandler} type="number" id="yearly-contribution" />
+            <input value={yearlySaving} onChange={(event) => {
+             commonUserInputHandler('yearlySavings',event.target.value); 
+            }} type="number" id="yearly-contribution" />
           </p>
         </div>
         <div className="input-group">
@@ -68,11 +61,15 @@ const InvestmentForm = (props) => {
             <label htmlFor="expected-return">
               Expected Interest (%, per year)
             </label>
-            <input value={expectedInterest} onChange={expectedInterestHandler} type="number" id="expected-return" />
+            <input value={expectedInterest} onChange={(event) => {
+             commonUserInputHandler('expectedReturn',event.target.value); 
+            }} type="number" id="expected-return" />
           </p>
           <p>
             <label htmlFor="duration">Investment Duration (years)</label>
-            <input value={durationInterest} onChange={investmentDurationHandler} type="number" id="duration" />
+            <input value={durationInterest} onChange={(event) => {
+             commonUserInputHandler('duration',event.target.value); 
+            }}  type="number" id="duration" />
           </p>
         </div>
         <p className="actions">
