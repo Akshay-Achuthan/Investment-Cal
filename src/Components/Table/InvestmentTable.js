@@ -26,8 +26,8 @@ const InvestmentTable = (props) => {
             <td>{formatter.format(item.year)}</td>
             <td>{formatter.format(item.savingsEndOfYear)}</td>
             <td>{formatter.format(item.yearlyInterest)}</td>
-            <td>TOTAL INTEREST GAINED</td>
-            <td>{formatter.format(item.yearlyContribution)}</td>
+            <td>{formatter.format(item.savingsEndOfYear - item.yearlyContribution *  item.year)}</td>
+            <td>{formatter.format(item.yearlyContribution * item.year)}</td>
           </tr>
           ))}
         </tbody>
