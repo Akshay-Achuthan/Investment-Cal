@@ -48,7 +48,8 @@ function App() {
       {/* Todo: Show below table conditionally (only once result data is available) */}
       {/* Show fallback text if no data is available */}
 
-      <InvestmentTable tableData={yearlyRequiredData}/>
+      {yearlyRequiredData.length > 0 ? <InvestmentTable tableData={yearlyRequiredData}/> : <h2 className="no-data">No Data Found</h2>}
+
     </div>
   );
 }
